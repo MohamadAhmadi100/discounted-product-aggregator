@@ -16,8 +16,8 @@ services:
       - postgres_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=scrape
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=mohamad
+      - POSTGRES_PASSWORD=123456
     ports:
       - "5432:5432"
     networks:

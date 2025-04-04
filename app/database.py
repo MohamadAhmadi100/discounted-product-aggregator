@@ -1,11 +1,8 @@
-import os
-
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import declarative_base, sessionmaker
+from app.settings.config import settings
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://mohamad:123456@localhost:5432/scrape")
-
-engine = create_async_engine(DATABASE_URL)
+engine = create_async_engine(settings.database_url)
 async_session_maker = sessionmaker(
     engine, class_=AsyncSession, expire_on_commit=False
 )

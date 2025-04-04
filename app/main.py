@@ -17,7 +17,7 @@ async def continuous_scraping():
                 await scraper_service.refresh_data()
         except Exception as e:
             logging.error(f"scraping failed: {e}")
-        await asyncio.sleep(10)
+        await asyncio.sleep(1000)
 
 
 @asynccontextmanager

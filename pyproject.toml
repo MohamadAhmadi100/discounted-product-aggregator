@@ -23,6 +23,7 @@ asyncpg = "^0.30.0"
 celery = "^5.5.0"
 base = "^0.0.0"
 asyncio = "^3.4.3"
+pydantic-settings = "^2.8.1"
 
 
 [build-system]

@@ -1,4 +1,4 @@
-from sqlalchemy import delete
+from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.product import Product
 from app.utils.zara_scraper import scrape_zara
@@ -52,3 +52,21 @@ class ScraperService:
             raise
         finally:
             await self.db.close()
+
+    async def get_products(self, store: str = None, category: str = None, min_discount: float = None):
+        try:
+            query = select(Product).order_by(Product.discount_percent.desc())
+
+            if store:
+                query = query.where(Product.store == store.lower())
+            if category:
+                query = query.where(Product.category == category.lower())
+            if min_discount:
+                query = query.where(Product.discount_percent >= min_discount)
+
+            result = await self.db.execute(query)
+            return result.scalars().all()
+
+        except Exception as e:
+            logger.error(f"Error fetching products: {e}")
+            raise
